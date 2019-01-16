@@ -2,6 +2,7 @@
 https://resonance-audio.github.io/resonance-audio/develop/web/getting-started.html
 */
 
+function Play(){
 
 // Create an AudioContext
 let audioContext = new AudioContext();
@@ -36,6 +37,8 @@ let roomMaterials = {
   up: 'transparent',
 };
 
+// Add the room definition to the scene.
+resonanceAudioScene.setRoomProperties(roomDimensions, roomMaterials);
 
 // Create an AudioElement.
 let audioElement = document.createElement('audio');
@@ -55,6 +58,15 @@ source.setPosition(-0.707, -0.707, 0);
 
 // Play the audio.
 audioElement.play();
+
+};
+
+
+$('play').click(function () {
+  Play();
+});
+
+
 
 
 /*
