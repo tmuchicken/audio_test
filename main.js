@@ -42,8 +42,9 @@ var playSound = function(buffer) {
 // main
 window.onload = function() {
   // サウンドを読み込む
-  getAudioBuffer('se.mp3', function(buffer) {
+  //getAudioBuffer('se.mp3', function(buffer) {
     //getAudioBuffer('Overture.mp3', function(buffer) {
+    getAudioBuffer('0.1s_20.mp3', function(buffer) {
     // 読み込み完了後にボタンにクリックイベントを登録
     var btn = document.getElementById('btn');
     btn.onclick = function() {
