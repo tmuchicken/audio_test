@@ -10,54 +10,6 @@ let resonanceAudioScene;
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
-
-
-
-/////////////////////////////////////////////
-///////  Resonance Audio Set up  ////////////
-/////////////////////////////////////////////
-
-/* playSoundの中に収容
-// Create a (first-order Ambisonic) Resonance Audio scene and pass it
-// オーディオシーンの作成
-let resonanceAudioScene = new ResonanceAudio(AudioContext, {
-  ambisonicOrder: 1,
-});
-*/
-
-//シーンに部屋を追加する
-// Define room dimensions.
-// By default, room dimensions are undefined (0m x 0m x 0m). メートルで決められる
-let roomDimensions = {
-  width: 3.1,
-  height: 2.5,
-  depth: 3.4,
-};
-
-// Define materials for each of the room’s six surfaces.
-// Room materials have different acoustic reflectivity. 
-// 部屋の6つの面（4つの壁、天井、および床）それぞれに部屋の材料を定義します。
-let roomMaterials = {
-  // Room wall materials
-  left: 'brick-bare',
-  right: 'curtain-heavy',
-  front: 'marble',
-  back: 'glass-thin',
-  // Room floor
-  down: 'grass',
-  // Room ceiling
-  up: 'transparent',
-};
-
-// Add the room definition to the scene.
-// シーンに部屋の定義を追加する
-resonanceAudioScene.setRoomProperties(roomDimensions, roomMaterials);
-
-
-
-/////////////////////////////////////////////
-/////////////////////////////////////////////
-
 // Audio 用の buffer を読み込む
 var getAudioBuffer = function(url, fn) {  
   var req = new XMLHttpRequest();
@@ -91,7 +43,16 @@ var playSound = function(buffer) {
   // Resonance ソースの作成
   //let source = resonanceAudioScene.createSource();
 
+  
   var context = new AudioContext();
+
+
+
+
+/////////////////////////////////////////////
+///////  Resonance Audio Set up  ////////////
+/////////////////////////////////////////////
+
 
   // Create a (first-order Ambisonic) Resonance Audio scene and pass it
   // オーディオシーンの作成
@@ -99,6 +60,37 @@ var playSound = function(buffer) {
       ambisonicOrder: 1,
     });
 
+  // Add the room definition to the scene.
+  // シーンに部屋の定義を追加する
+  resonanceAudioScene.setRoomProperties(roomDimensions, roomMaterials);
+
+
+  //シーンに部屋を追加する
+  // Define room dimensions.
+  // By default, room dimensions are undefined (0m x 0m x 0m). メートルで決められる
+  let roomDimensions = {
+    width: 3.1,
+    height: 2.5,
+    depth: 3.4,
+  };
+
+  // Define materials for each of the room’s six surfaces.
+  // Room materials have different acoustic reflectivity. 
+  // 部屋の6つの面（4つの壁、天井、および床）それぞれに部屋の材料を定義します。
+  let roomMaterials = {
+    // Room wall materials
+    left: 'brick-bare',
+    right: 'curtain-heavy',
+    front: 'marble',
+    back: 'glass-thin',
+    // Room floor
+    down: 'grass',
+    // Room ceiling
+    up: 'transparent',
+  };
+
+  /////////////////////////////////////////////
+  /////////////////////////////////////////////
 
   // buffer をセット
   resonanceAudioScene.buffer = buffer;
