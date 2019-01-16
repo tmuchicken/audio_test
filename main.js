@@ -57,12 +57,8 @@ var playSound = function(buffer) {
       ambisonicOrder: 1,
     });
 
-  // Add the room definition to the scene.
-  // シーンに部屋の定義を追加する
-  resonanceAudioScene.setRoomProperties(roomDimensions, roomMaterials);
 
-
-  //シーンに部屋を追加する
+      //シーンに部屋を追加する
   // Define room dimensions.
   // By default, room dimensions are undefined (0m x 0m x 0m). メートルで決められる
   let roomDimensions = {
@@ -85,6 +81,14 @@ var playSound = function(buffer) {
     // Room ceiling
     up: 'transparent',
   };
+
+
+  // Add the room definition to the scene.
+  // シーンに部屋の定義を追加する
+  resonanceAudioScene.setRoomProperties(roomDimensions, roomMaterials);
+
+
+
 
   /////////////////////////////////////////////
   /////////////////////////////////////////////
