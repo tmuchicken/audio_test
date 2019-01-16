@@ -1,9 +1,53 @@
 /*
  * main.js
+ http://phiary.me/webaudio-api-getting-started/
  */
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext();
+
+
+
+/////////////////////////////////////////////
+///////  Resonance Audio Set up  ////////////
+/////////////////////////////////////////////
+
+// Create a (first-order Ambisonic) Resonance Audio scene and pass it
+// オーディオシーンの作成
+let resonanceAudioScene = new ResonanceAudio(audioContext);
+
+//シーンに部屋を追加する
+// Define room dimensions.
+// By default, room dimensions are undefined (0m x 0m x 0m). メートルで決められる
+let roomDimensions = {
+  width: 3.1,
+  height: 2.5,
+  depth: 3.4,
+};
+
+// Define materials for each of the room’s six surfaces.
+// Room materials have different acoustic reflectivity. 
+// 部屋の6つの面（4つの壁、天井、および床）それぞれに部屋の材料を定義します。
+let roomMaterials = {
+  // Room wall materials
+  left: 'brick-bare',
+  right: 'curtain-heavy',
+  front: 'marble',
+  back: 'glass-thin',
+  // Room floor
+  down: 'grass',
+  // Room ceiling
+  up: 'transparent',
+};
+
+// Add the room definition to the scene.
+// シーンに部屋の定義を追加する
+resonanceAudioScene.setRoomProperties(roomDimensions, roomMaterials);
+
+
+
+/////////////////////////////////////////////
+/////////////////////////////////////////////
 
 // Audio 用の buffer を読み込む
 var getAudioBuffer = function(url, fn) {  
@@ -29,12 +73,26 @@ var getAudioBuffer = function(url, fn) {
 
 // サウンドを再生
 var playSound = function(buffer) {
+  /* 
+  //sourceの都合上コメントアウト
   // source を作成
   var source = context.createBufferSource();
+  */
+
+  // Resonance ソースの作成
+  let source = resonanceAudioScene.createSource();
+
+
+
   // buffer をセット
   source.buffer = buffer;
   // context に connect
   source.connect(context.destination);
+  
+  // Set the source position relative to the room center (source default position).
+  // ソースをシーンに配置する
+  source.setPosition(-0.707, -0.707, 0);
+  
   // 再生
   source.start(0);
 };
