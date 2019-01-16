@@ -414,7 +414,7 @@ function setupEndCallUI() {
 /*
 https://resonance-audio.github.io/resonance-audio/develop/web/getting-started.html
 */
-
+/*
 // Create a (first-order Ambisonic) Resonance Audio scene and pass it
 // the AudioContext.
 let resonanceAudioScene = new ResonanceAudio(audioContext);
@@ -474,7 +474,7 @@ btn.onclick(function () {
   Play();
 });
 
-
+*/
 
 /*
  * main.js
