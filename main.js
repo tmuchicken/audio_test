@@ -14,7 +14,7 @@ var context = new AudioContext();
 
 // Create a (first-order Ambisonic) Resonance Audio scene and pass it
 // オーディオシーンの作成
-let resonanceAudioScene = new ResonanceAudio(audioContext);
+let resonanceAudioScene = new ResonanceAudio(AudioContext);
 
 //シーンに部屋を追加する
 // Define room dimensions.
