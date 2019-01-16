@@ -4,11 +4,11 @@
  */
 
 
-let AudioContext;
+let context;
 let resonanceAudioScene;
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
-var context = new AudioContext();
+
 
 
 
@@ -90,10 +90,11 @@ var playSound = function(buffer) {
   // Resonance ソースの作成
   //let source = resonanceAudioScene.createSource();
 
+  var context = new AudioContext();
 
   // Create a (first-order Ambisonic) Resonance Audio scene and pass it
   // オーディオシーンの作成
-  let resonanceAudioScene = new ResonanceAudio(AudioContext, {
+  let resonanceAudioScene = new ResonanceAudio(context, {
       ambisonicOrder: 1,
     });
 
