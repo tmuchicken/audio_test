@@ -8,7 +8,9 @@
 var context;
 let resonanceAudioScene;
 
-window.AudioContext = window.AudioContext || window.webkitAudioContext;
+window.AudioContext = window.AudioContext || window.webkitAudioContext;  
+var context = new AudioContext();
+
 
 // Audio 用の buffer を読み込む
 var getAudioBuffer = function(url, fn) {  
@@ -42,11 +44,6 @@ var playSound = function(buffer) {
 
   // Resonance ソースの作成
   //let source = resonanceAudioScene.createSource();
-
-  
-  var context = new AudioContext();
-
-
 
 
 /////////////////////////////////////////////
