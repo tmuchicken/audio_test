@@ -5,7 +5,7 @@
  */
 
 
-let context;
+var context;
 let resonanceAudioScene;
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
