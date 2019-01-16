@@ -3,6 +3,10 @@
  http://phiary.me/webaudio-api-getting-started/
  */
 
+
+let AudioContext;
+let resonanceAudioScene;
+
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext();
 
@@ -12,9 +16,13 @@ var context = new AudioContext();
 ///////  Resonance Audio Set up  ////////////
 /////////////////////////////////////////////
 
+/* playSoundの中に収容
 // Create a (first-order Ambisonic) Resonance Audio scene and pass it
 // オーディオシーンの作成
-let resonanceAudioScene = new ResonanceAudio(AudioContext);
+let resonanceAudioScene = new ResonanceAudio(AudioContext, {
+  ambisonicOrder: 1,
+});
+*/
 
 //シーンに部屋を追加する
 // Define room dimensions.
@@ -80,21 +88,27 @@ var playSound = function(buffer) {
   */
 
   // Resonance ソースの作成
-  let source = resonanceAudioScene.createSource();
+  //let source = resonanceAudioScene.createSource();
 
+
+  // Create a (first-order Ambisonic) Resonance Audio scene and pass it
+  // オーディオシーンの作成
+  let resonanceAudioScene = new ResonanceAudio(AudioContext, {
+      ambisonicOrder: 1,
+    });
 
 
   // buffer をセット
-  source.buffer = buffer;
+  resonanceAudioScene.buffer = buffer;
   // context に connect
-  source.connect(context.destination);
+  resonanceAudioScene.connect(context.destination);
   
   // Set the source position relative to the room center (source default position).
   // ソースをシーンに配置する
-  source.setPosition(-0.707, -0.707, 0);
+  resonanceAudioScene.setPosition(-0.707, -0.707, 0);
   
   // 再生
-  source.start(0);
+  resonanceAudioScene.start(0);
 };
 
 // main
