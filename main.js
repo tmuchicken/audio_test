@@ -1,10 +1,69 @@
 /*
+https://resonance-audio.github.io/resonance-audio/develop/web/getting-started.html
+*/
+
+
+// Create an AudioContext
+let audioContext = new AudioContext();
+
+// Create a (first-order Ambisonic) Resonance Audio scene and pass it
+// the AudioContext.
+let resonanceAudioScene = new ResonanceAudio(audioContext);
+
+// Connect the scene’s binaural output to stereo out.
+resonanceAudioScene.output.connect(audioContext.destination);
+
+// Define room dimensions.
+// By default, room dimensions are undefined (0m x 0m x 0m).
+let roomDimensions = {
+  width: 3.1,
+  height: 2.5,
+  depth: 3.4,
+};
+
+
+// Define materials for each of the room’s six surfaces.
+// Room materials have different acoustic reflectivity.
+let roomMaterials = {
+  // Room wall materials
+  left: 'brick-bare',
+  right: 'curtain-heavy',
+  front: 'marble',
+  back: 'glass-thin',
+  // Room floor
+  down: 'grass',
+  // Room ceiling
+  up: 'transparent',
+};
+
+
+// Create an AudioElement.
+let audioElement = document.createElement('audio');
+
+// Load an audio file into the AudioElement.
+audioElement.src = 'SpeechSample.wav';
+
+// Generate a MediaElementSource from the AudioElement.
+let audioElementSource = audioContext.createMediaElementSource(audioElement);
+
+// Add the MediaElementSource to the scene as an audio input source.
+let source = resonanceAudioScene.createSource();
+audioElementSource.connect(source.input);
+
+// Set the source position relative to the room center (source default position).
+source.setPosition(-0.707, -0.707, 0);
+
+// Play the audio.
+audioElement.play();
+
+
+/*
  * main.js
  http://phiary.me/webaudio-api-getting-started/
  更新日時:2019/18/05
  */
 
-
+/*
 var context;
 let resonanceAudioScene;
 
@@ -50,7 +109,7 @@ var playSound = function(buffer) {
 ///////  Resonance Audio Set up  ////////////
 /////////////////////////////////////////////
 
-
+/*
   // Create a (first-order Ambisonic) Resonance Audio scene and pass it
   // オーディオシーンの作成
   let resonanceAudioScene = new ResonanceAudio(context, {
@@ -120,3 +179,4 @@ window.onload = function() {
     };
   });
 };
+*/
