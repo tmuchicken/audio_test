@@ -1,6 +1,7 @@
 /*
  * main.js
  http://phiary.me/webaudio-api-getting-started/
+ 更新日時:2019/18/05
  */
 
 
