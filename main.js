@@ -61,11 +61,10 @@ audioElement.play();
 
 };
 
-/*
-$('play').click(function () {
+
+btn.onclick(function () {
   Play();
 });
-*/
 
 
 
