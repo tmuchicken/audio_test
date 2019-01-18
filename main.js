@@ -11,6 +11,13 @@ let peer = null;
 let existingCall = null;
 var videoContainer = document.getElementById('container');
 var localVideo = document.getElementById('local_video');
+//シーンの素材設定
+let dimensions = { width: 1.5, height: 2.4, depth: 1.3  };
+let materials = {left: 'brick-bare', right: 'brick-bare',
+                   up: 'brick-bare', down: 'wood-panel',
+                front: 'brick-bare', back: 'brick-bare' };
+
+
 
 function stopVideo() {
     localVideo.pause();
@@ -137,13 +144,24 @@ function stopStream(stream) {
          var context1  = new AudioContext();
          //sourceの作成
          var source1 = context1.createMediaStreamSource(stream);
+         
+         //シーンの作成
+         scene = new ResonanceAudio(context1, {
+            ambisonicOrder: 1,
+          });
+         scene.setRoomProperties(dimensions,
+            materials);
+         scene.setListenerPosition(0,0,0); //(x,y,z)
+         
          //Rsourceの作成
-         var Rsource = resonanceAudio.createSource({});
-         //connect Rsource
+         var Rsource = scene.createSource();
+         Rsource.setPosition(10,0,0); //(x,y,z)
          source1.connect(Rsource.input);
+
+
          //peer1の作成
          var peer1 = context1.createMediaStreamDestination();
-         resonanceAudio.output.connect(peer1); //ココの先頭変えるよ
+         scene.output.connect(peer1); //ココの先頭変えるよ
          localStream1 = peer1.stream;
  
      logStream('selectedVideo', stream);
