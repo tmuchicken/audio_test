@@ -155,7 +155,7 @@ function stopStream(stream) {
          
          //Rsourceの作成
          var Rsource = scene.createSource();
-         Rsource.setPosition(1,0,0); //(x,y,z)
+         Rsource.setPosition(10,0,0); //(x,y,z)
          source1.connect(Rsource.input);
 
 
