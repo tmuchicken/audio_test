@@ -170,7 +170,7 @@ function stopStream(stream) {
    });
  };
 
- function startSelectedVideoAudio(sound) {
+ function startSelectedVideoAudio() {
     var audioId = getSelectedAudio();
     console.log('selected audio=' + audioId);
     var constraints = {
@@ -253,11 +253,11 @@ function quick(){
     
 //オーディオシステムの選択
 $('#start_video_button_L').click(function () {
-    startSelectedVideoAudio(-1);
+    startSelectedVideoAudio();
 });
 
 $('#start_video_button_R').click(function () {
-    startSelectedVideoAudio(1);
+    startSelectedVideoAudio();
 });
 
 $('#start_video_button_W').click(function () {
